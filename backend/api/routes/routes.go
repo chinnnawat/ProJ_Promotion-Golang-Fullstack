@@ -2,7 +2,9 @@ package routes
 
 import (
 	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/api/handlers"
+	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/infrastructure/datastores"
 	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/infrastructure/identity"
+	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/models/productsuc"
 	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/models/userModels"
 	"github.com/gofiber/fiber/v2"
 )
@@ -18,4 +20,13 @@ func InitPublicRoutes(app *fiber.App) {
 	registerUseCase := userModels.NewRegisterUseCase(identityManager)
 
 	grp.Post("/register", handlers.RegisterHandler(registerUseCase))
+}
+
+func InitProtectedRoutes(app *fiber.App) {
+	grp := app.Group("/api/user")
+
+	productsDataStore := datastores.NewProductsDataStore()
+
+	createProductUseCase := productsuc.NewCreateProductUseCase(productsDataStore)
+	grp.Post("/products", handlers.CreateProductHandler(createProductUseCase))
 }

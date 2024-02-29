@@ -29,5 +29,9 @@ func InitFiberMiddlewares(
 	})
 	// routes that don't require a JWT token
 	initPublicRoutes(app)
+
+	// routes that require authentication/authorization
+	initProtectedRoutes(app)
+
 	log.Println("fiber middlewares initialized")
 }
