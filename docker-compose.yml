@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    env_file:
+      - .env
+    # ports:
+    #   - 3000:3000
+    # volumes:
+    #   - .:/usr/src/app
+    # command: go run main.go -b 0.0.0.0
+  db:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+  keycloak:
+    image: quay.io/keycloak/keycloak:21.1.1
+    environment:
+      - KEYCLOAK_USER=${KEYCLOAK_USER}
+      - KEYCLOAK_PASSWORD=${KEYCLOAK_PASSWORD}
+      - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN}
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    command: 
+      - start-dev
+
+volumes:
+  postgres-db:
