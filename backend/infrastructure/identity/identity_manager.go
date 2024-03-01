@@ -75,14 +75,13 @@ func (im *identityManager) CreateUser(ctx context.Context, user gocloak.User, pa
 	return userKeycloak, nil
 }
 
-// Half
-// func (im *identityManager) RetrospectToken(ctx context.Context, accessToken string) (*gocloak.IntroSpectTokenResult, error) {
+func (im *identityManager) RetrospectToken(ctx context.Context, accessToken string) (*gocloak.IntroSpectTokenResult, error) {
 
-// 	client := gocloak.NewClient(im.baseUrl)
+	client := gocloak.NewClient(im.baseUrl)
 
-// 	rptResult, err := client.RetrospectToken(ctx, accessToken, im.restApiClientId, im.restApiClientSecret, im.realm)
-// 	if err != nil {
-// 		return nil, errors.Wrap(err, "unable to retrospect token")
-// 	}
-// 	return rptResult, nil
-// }
+	rptResult, err := client.RetrospectToken(ctx, accessToken, im.restApiClientId, im.restApiClientSecret, im.realm)
+	if err != nil {
+		return nil, errors.Wrap(err, "unable to retrospect token")
+	}
+	return rptResult, nil
+}

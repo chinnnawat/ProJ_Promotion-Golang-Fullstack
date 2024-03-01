@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 
+	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/infrastructure/identity"
 	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/shared/enums"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -29,6 +30,9 @@ func InitFiberMiddlewares(
 	})
 	// routes that don't require a JWT token
 	initPublicRoutes(app)
+
+	tokenRetrospector := identity.NewIdentityManager()
+	app.Use(NewJwtMiddleware(tokenRetrospector))
 
 	// routes that require authentication/authorization
 	initProtectedRoutes(app)

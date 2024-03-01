@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/api/handlers"
+	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/api/middlewares"
 	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/infrastructure/datastores"
 	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/infrastructure/identity"
 	"github.com/chinnnawat/ProJ_Promotion-Golang/backend/models/productsuc"
@@ -28,5 +29,8 @@ func InitProtectedRoutes(app *fiber.App) {
 	productsDataStore := datastores.NewProductsDataStore()
 
 	createProductUseCase := productsuc.NewCreateProductUseCase(productsDataStore)
-	grp.Post("/products", handlers.CreateProductHandler(createProductUseCase))
+	grp.Post("/products", middlewares.NewRequiresRealmRole("admin"), handlers.CreateProductHandler(createProductUseCase))
+
+	getProductsUseCase := productsuc.NewGetProductsUseCase(productsDataStore)
+	grp.Get("/products", middlewares.NewRequiresRealmRole("viewer"), handlers.GetProductsHandler(getProductsUseCase))
 }

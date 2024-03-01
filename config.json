@@ -7,6 +7,7 @@
         "RestApi": {
             "ClientId": "backend",
             "ClientSecret": "cpekocn2kQtTVV4FhCSFS3Ey0muJzQbV"
-        }
+        },
+        "RealmRS256PublicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxtF8t8Z0rMKh2tkuDVTfaZJMFHKzLYUqkWVDYrvaz7YuyOLC6wpDaYPAZepxv0jRGozE5qz739V7xampADjhk6TlgcZcknR/8vmdI4bHfWhzvI9ZfKbdFyfNass3ScMpZc9WK1ZRsB1WsBTUBEODzpM2DNMVM2ANlkf0eNC3RKaGNsUR/cODljmq+QZLn13Gs/TO7YI/3xsH+C4iqTDBtIDHgj0EzMjmAP/jpGPnz7v5LBlwp8oUCk/aw5t7qKniEEZ9XLXQs+uCLAz3HjWi4h+0rnJffXsz+yhZ9ebggh4s9Znk55PTgy/fBJ1qtE3v5pNvu5epi1EbKYKPbTqHfwIDAQAB"
     }
 }
